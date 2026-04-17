@@ -1,6 +1,6 @@
 <div align="center">
 
-# ssh-portfolio
+# samar-personal-portfolio
 
 **A fully interactive terminal portfolio, served over SSH.**
 Browse my work without leaving your shell.
@@ -8,7 +8,6 @@ Browse my work without leaving your shell.
 [![Go](https://img.shields.io/badge/Go-1.25-00ADD8?style=flat-square&logo=go)](https://go.dev)
 [![Bubbletea](https://img.shields.io/badge/Bubbletea-TUI-FF69B4?style=flat-square)](https://github.com/charmbracelet/bubbletea)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://hub.docker.com)
-[![CI/CD](https://github.com/MoveFastAndBreakThings-dot/ssh-portfolio/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/MoveFastAndBreakThings-dot/ssh-portfolio/actions/workflows/ci-cd.yml)
 [![Fly.io](https://img.shields.io/badge/Deployed-Fly.io-8B5CF6?style=flat-square)](https://fly.io)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
