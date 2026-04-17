@@ -1,0 +1,2531 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+apt
+content/data.go
+docker-compose.yml
+Dockerfile
+fly.toml
+go.mod
+IMG_6363.JPG
+main.go
+Makefile
+README.md
+tests/content_test.go
+tests/keygen_test.go
+tests/model_test.go
+tests/styles_test.go
+tests/views_test.go
+tui/ascii_art.txt
+tui/ascii.go
+tui/model.go
+tui/portrait.jpg
+tui/styles.go
+tui/views.go
+update
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitignore">
+.ssh/
+ssh-portfolio
+</file>
+
+<file path="apt">
+deb [trusted=yes] https://apt.fury.io/ascii-image-converter/ /
+</file>
+
+<file path="content/data.go">
+package content
+
+type Profile struct {
+	Name     string
+	Role     string
+	Location string
+	Email    string
+	Bio      []string
+}
+
+type Job struct {
+	Title   string
+	Company string
+	Period  string
+	Bullets []string
+	Tags    []string
+}
+
+type Project struct {
+	Name        string
+	Event       string
+	Description string
+	Tags        []string
+	URL         string
+}
+
+type SkillGroup struct {
+	Category string
+	Items    []string
+}
+
+type Link struct {
+	Label string
+	URL   string
+}
+
+var MyProfile = Profile{
+	Name:     "Samardeep Singh",
+	Role:     "Engineering Student @ University of Alberta",
+	Location: "Edmonton, AB, Canada",
+	Email:    "samarde1@ualberta.ca",
+	Bio: []string{
+		"Engineering student at the University of Alberta, transferring into the BSc Computing Science – AI Major (Fall 2026). Focused on reinforcement learning, graph neural networks, and computational drug discovery.",
+		"Previously 15 months as a Data Analyst / ML Intern at Molecule AI — drug-target interaction analysis, molecular toxicity classifiers, SMILES preprocessing pipelines.",
+		"Software team member at ARVP building ROS2 computer vision pipelines and the team's first RL integration for autonomous underwater navigation on Kenai, an AUV competing in RoboSub.",
+	},
+}
+
+var Jobs = []Job{
+	{
+		Title:   "Data Analyst / Machine Learning Intern",
+		Company: "Molecule AI Pvt. Ltd. — New Delhi, India",
+		Period:  "Mar 2023 – Jun 2024",
+		Bullets: []string{
+			"Engineered end-to-end preprocessing pipelines for molecular property datasets (SMILES strings, bioactivity labels) enabling reproducible feature engineering for GNN and Ridge Regression models.",
+			"Conducted EDA on drug-target interaction datasets; statistical modeling identified physicochemical feature correlations that improved virtual screening hit rates.",
+			"Trained and benchmarked scikit-learn classifiers for molecular toxicity prediction, reducing false-positive rates in compound filtering and accelerating lead prioritization workflows.",
+		},
+		Tags: []string{"PyTorch", "GNN", "Scikit-learn", "Python", "pandas", "RDKit", "Drug Discovery"},
+	},
+	{
+		Title:   "Asset Protection Associate",
+		Company: "Walmart Canada — Edmonton, AB",
+		Period:  "Oct 2025 – Present",
+		Bullets: []string{
+			"Execute systematic inventory audits and data-driven loss investigations using internal reporting tools.",
+			"Produce structured incident reports and root-cause analyses that identify anomalous patterns and inform process improvements.",
+			"Coordinate with department managers to implement corrective action plans reducing documented inventory discrepancies.",
+		},
+		Tags: []string{"Data Analysis", "Reporting", "Operations"},
+	},
+	{
+		Title:   "Software Team Member – Perception & RL Integration",
+		Company: "Autonomous Robotic Vehicle Project (ARVP), University of Alberta",
+		Period:  "Oct 2025 – Present",
+		Bullets: []string{
+			"Developing ROS2-based computer vision pipelines for Kenai, ARVP's AUV competing in the international RoboSub Competition; implementing YOLO-based underwater object detection integrated into mission-planning behaviour trees.",
+			"Pioneering the team's first RL integration — designing a reward-structured simulation environment to replace hand-tuned controllers with a deep RL policy for autonomous underwater navigation.",
+		},
+		Tags: []string{"ROS2", "Python", "YOLO", "OpenCV", "Reinforcement Learning", "Behaviour Trees"},
+	},
+}
+
+var Projects = []Project{
+	{
+		Name:        "TorsionNet — Deep RL for Molecular Conformer Generation",
+		Event:       "HackED 2026",
+		Description: "Replicated TorsionNet (NeurIPS), a deep RL approach to conformer search. Built a custom OpenAI Gym environment with RDKit, trained a PPO agent with an MPNN backbone and curriculum learning, deployed inference via FastAPI and Docker. Achieved 90% reduction in generation time vs. brute-force search.",
+		Tags:        []string{"PyTorch", "PyTorch Geometric", "RDKit", "PPO", "GNN", "FastAPI", "Docker"},
+		URL:         "",
+	},
+	{
+		Name:        "CoSound — Mindful Social Listening",
+		Event:       "NatHacks 2024 · Honorary Mention",
+		Description: "Real-time ambient-audio-driven music recommendation system, physically installed at Cameron Library, University of Alberta. Ridge Regression classifier on ESC-50 dataset; 5-dimensional user preference embeddings from Librosa audio features matched against song profiles via live NFC-tag voting.",
+		Tags:        []string{"Python", "Scikit-learn", "Librosa", "React", "Node.js", "PostgreSQL", "Docker"},
+		URL:         "",
+	},
+	{
+		Name:        "GraphSAGE-MAPPO",
+		Event:       "",
+		Description: "Multi-agent RL system on mesh networks using GraphSAGE and MAPPO. Built for research positioning at the intersection of GNNs and multi-agent systems.",
+		Tags:        []string{"PyTorch", "GNN", "MARL", "Python"},
+		URL:         "",
+	},
+	{
+		Name:        "DrugBAN Reimplementation (In Progress)",
+		Event:       "",
+		Description: "Reimplementing the Bilinear Attention Network for drug-target interaction prediction. Next project in computational drug discovery portfolio following TorsionNet.",
+		Tags:        []string{"PyTorch", "Bioinformatics", "Attention", "GNN"},
+		URL:         "",
+	},
+}
+
+var SkillGroups = []SkillGroup{
+	{
+		Category: "ML / AI",
+		Items:    []string{"PyTorch", "PyTorch Geometric", "Scikit-learn", "Deep Learning", "PPO / RL", "GNN", "Statistical Modeling", "NumPy", "SciPy", "Librosa"},
+	},
+	{
+		Category: "Data Science",
+		Items:    []string{"Python", "pandas", "SQL", "PostgreSQL", "Feature Engineering", "EDA", "Jupyter", "matplotlib", "seaborn"},
+	},
+	{
+		Category: "Robotics / CV",
+		Items:    []string{"ROS2", "OpenCV", "YOLO", "Behaviour Trees", "AUV Stack", "3D CAD"},
+	},
+	{
+		Category: "Engineering / MLOps",
+		Items:    []string{"Docker", "Git", "SSH", "Linux", "FastAPI", "REST APIs", "CI/CD", "AWS", "Supabase", "React", "GoLang"},
+	},
+}
+
+var Links = []Link{
+	{Label: "GitHub", URL: "https://github.com/MoveFastAndBreakThings-dot?tab=repositories"},
+	{Label: "LinkedIn", URL: "https://www.linkedin.com/in/samardeep-singh-488b4024b/"},
+	{Label: "Email", URL: "mailto:samarde1@ualberta.ca"},
+	{Label: "Resume", URL: "https://drive.google.com/file/d/1bvnNffGLOVFWwAoVa1sZzd6BVQ-xCNEX/view?usp=sharing"},
+}
+
+var Extracurriculars = []string{
+	"Runner-Up — Enbridge Case Competition, University of Alberta (2025)",
+	"Runner-Up — Global Health Case Competition, MSF / Hep-C in Cox's Bazar (2026)",
+	"Participant — HackED 2026, University of Alberta Engineering Students' Society",
+	"Honorary Mention — NatHacks 2024, NeurAlbertaTech Hacks",
+}
+</file>
+
+<file path="docker-compose.yml">
+version: "3.9"
+services:
+  ssh-portfolio:
+    build: .
+    ports:
+      - "23234:23234"
+    volumes:
+      - ./.ssh:/app/.ssh
+    restart: unless-stopped
+    environment:
+      - SSH_PORT=23234
+</file>
+
+<file path="Dockerfile">
+FROM golang:1.25-alpine AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o ssh-portfolio .
+
+FROM alpine:3.19
+RUN apk add --no-cache ca-certificates
+WORKDIR /app
+COPY --from=builder /app/ssh-portfolio .
+EXPOSE 23234
+CMD ["./ssh-portfolio"]
+</file>
+
+<file path="fly.toml">
+app = "samar-personal-portfolio"
+primary_region = "ord"
+
+[build]
+
+[env]
+  SSH_PORT = "23234"
+
+[[services]]
+  internal_port = 23234
+  protocol = "tcp"
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[services.ports]]
+    port = 23234
+
+[[mounts]]
+  source = "ssh_keys"
+  destination = "/app/.ssh"
+</file>
+
+<file path="go.mod">
+module ssh-portfolio
+
+go 1.25.0
+
+require (
+	github.com/charmbracelet/bubbles v1.0.0
+	github.com/charmbracelet/bubbletea v1.3.10
+	github.com/charmbracelet/lipgloss v1.1.0
+	github.com/charmbracelet/wish v1.4.7
+)
+
+require (
+	github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be // indirect
+	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
+	github.com/charmbracelet/colorprofile v0.4.1 // indirect
+	github.com/charmbracelet/keygen v0.5.3 // indirect
+	github.com/charmbracelet/log v0.4.1 // indirect
+	github.com/charmbracelet/ssh v0.0.0-20250128164007-98fd5ae11894 // indirect
+	github.com/charmbracelet/x/ansi v0.11.6 // indirect
+	github.com/charmbracelet/x/cellbuf v0.0.15 // indirect
+	github.com/charmbracelet/x/conpty v0.1.0 // indirect
+	github.com/charmbracelet/x/errors v0.0.0-20240508181413-e8d8b6e2de86 // indirect
+	github.com/charmbracelet/x/input v0.3.4 // indirect
+	github.com/charmbracelet/x/term v0.2.2 // indirect
+	github.com/charmbracelet/x/termios v0.1.0 // indirect
+	github.com/charmbracelet/x/windows v0.2.0 // indirect
+	github.com/clipperhouse/displaywidth v0.9.0 // indirect
+	github.com/clipperhouse/stringish v0.1.1 // indirect
+	github.com/clipperhouse/uax29/v2 v2.5.0 // indirect
+	github.com/creack/pty v1.1.21 // indirect
+	github.com/erikgeiser/coninput v0.0.0-20211004153227-1c3628e74d0f // indirect
+	github.com/go-logfmt/logfmt v0.6.0 // indirect
+	github.com/lucasb-eyer/go-colorful v1.3.0 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mattn/go-localereader v0.0.1 // indirect
+	github.com/mattn/go-runewidth v0.0.19 // indirect
+	github.com/muesli/ansi v0.0.0-20230316100256-276c6243b2f6 // indirect
+	github.com/muesli/cancelreader v0.2.2 // indirect
+	github.com/muesli/termenv v0.16.0 // indirect
+	github.com/rivo/uniseg v0.4.7 // indirect
+	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
+	golang.org/x/crypto v0.50.0 // indirect
+	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
+	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/text v0.36.0 // indirect
+)
+</file>
+
+<file path="main.go">
+package main
+
+import (
+	"context"
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/x509"
+	"encoding/pem"
+	"fmt"
+	"log"
+	"os"
+	"os/signal"
+	"strconv"
+	"syscall"
+	"time"
+
+	tea "github.com/charmbracelet/bubbletea"
+	cssh "github.com/charmbracelet/ssh"
+	"github.com/charmbracelet/wish"
+	"github.com/charmbracelet/wish/activeterm"
+	bm "github.com/charmbracelet/wish/bubbletea"
+	"github.com/charmbracelet/wish/logging"
+
+	"ssh-portfolio/tui"
+)
+
+const (
+	defaultPort     = 23234
+	hostKeyPath     = ".ssh/host_key"
+	shutdownTimeout = 30 * time.Second
+)
+
+func main() {
+	port := defaultPort
+	if p := os.Getenv("SSH_PORT"); p != "" {
+		if n, err := strconv.Atoi(p); err == nil {
+			port = n
+		}
+	}
+
+	// Ensure host-key directory exists.
+	if err := os.MkdirAll(".ssh", 0700); err != nil {
+		log.Fatalf("mkdir .ssh: %v", err)
+	}
+
+	// Generate host key on first run; reuse on subsequent starts.
+	if _, err := os.Stat(hostKeyPath); os.IsNotExist(err) {
+		if err := generateHostKey(hostKeyPath); err != nil {
+			log.Fatalf("generate host key: %v", err)
+		}
+		log.Printf("Generated new RSA host key → %s", hostKeyPath)
+	}
+
+	srv, err := wish.NewServer(
+		wish.WithAddress(fmt.Sprintf(":%d", port)),
+		wish.WithHostKeyPath(hostKeyPath),
+		wish.WithMiddleware(
+			bm.Middleware(teaHandler),
+			activeterm.Middleware(),
+			logging.Middleware(),
+		),
+	)
+	if err != nil {
+		log.Fatalf("create SSH server: %v", err)
+	}
+
+	done := make(chan os.Signal, 1)
+	signal.Notify(done, syscall.SIGINT, syscall.SIGTERM)
+
+	log.Printf("SSH portfolio listening on :%d  →  ssh -p %d localhost", port, port)
+
+	go func() {
+		if err := srv.ListenAndServe(); err != nil {
+			log.Printf("server stopped: %v", err)
+		}
+	}()
+
+	<-done
+	log.Println("Shutting down…")
+
+	ctx, cancel := context.WithTimeout(context.Background(), shutdownTimeout)
+	defer cancel()
+
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Printf("shutdown error: %v", err)
+	}
+	log.Println("Server stopped.")
+}
+
+// teaHandler creates a fresh TUI model for every incoming SSH connection.
+func teaHandler(s cssh.Session) (tea.Model, []tea.ProgramOption) {
+	pty, _, _ := s.Pty()
+	log.Printf("connection  ip=%s  time=%s", s.RemoteAddr(), time.Now().Format(time.RFC3339))
+	m := tui.NewModel(pty.Window.Width, pty.Window.Height)
+	return m, []tea.ProgramOption{tea.WithAltScreen()}
+}
+
+// generateHostKey writes a fresh 4096-bit RSA private key in PEM format.
+func generateHostKey(path string) error {
+	key, err := rsa.GenerateKey(rand.Reader, 4096)
+	if err != nil {
+		return err
+	}
+	f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return pem.Encode(f, &pem.Block{
+		Type:  "RSA PRIVATE KEY",
+		Bytes: x509.MarshalPKCS1PrivateKey(key),
+	})
+}
+</file>
+
+<file path="Makefile">
+BINARY   := ssh-portfolio
+PORT     := 23234
+SSH_HOST := localhost
+
+.PHONY: all build run test clean docker-up docker-down docker-logs connect fmt vet lint ship
+
+all: build
+
+## ── Ship (build + test + deploy) ─────────────────────────────────────────────
+
+ship: fmt vet build test docker-up
+	@echo ""
+	@echo "  ✓ fmt · vet · build · test · deployed on :$(PORT)"
+	@echo ""
+
+## ── Build ─────────────────────────────────────────────────────────────────────
+
+build:
+	go build -ldflags="-s -w" -o $(BINARY) .
+
+build-linux:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o $(BINARY)-linux .
+
+## ── Dev ───────────────────────────────────────────────────────────────────────
+
+run:
+	go run .
+
+connect:
+	ssh -p $(PORT) $(SSH_HOST)
+
+## ── Test ──────────────────────────────────────────────────────────────────────
+
+test:
+	go test ./tests/... -v
+
+test-short:
+	go test ./tests/... -short
+
+test-race:
+	go test ./tests/... -race
+
+cover:
+	go test ./tests/... -coverprofile=coverage.out
+	go tool cover -html=coverage.out
+
+## ── Quality ───────────────────────────────────────────────────────────────────
+
+fmt:
+	gofmt -w .
+
+vet:
+	go vet ./...
+
+lint:
+	golangci-lint run ./...
+
+tidy:
+	go mod tidy
+
+## ── Docker ────────────────────────────────────────────────────────────────────
+
+docker-up:
+	docker compose up --build -d
+
+docker-down:
+	docker compose down
+
+docker-logs:
+	docker compose logs -f
+
+docker-restart:
+	docker compose restart
+
+## ── Clean ─────────────────────────────────────────────────────────────────────
+
+clean:
+	rm -f $(BINARY) $(BINARY)-linux coverage.out
+
+## ── Help ──────────────────────────────────────────────────────────────────────
+
+help:
+	@echo ""
+	@echo "  build          compile binary"
+	@echo "  build-linux    cross-compile for linux/amd64"
+	@echo "  run            go run . (dev server on :$(PORT))"
+	@echo "  connect        ssh -p $(PORT) $(SSH_HOST)"
+	@echo "  test           run all tests verbose"
+	@echo "  test-short     run tests (skip slow)"
+	@echo "  test-race      run tests with race detector"
+	@echo "  cover          generate HTML coverage report"
+	@echo "  fmt            gofmt all files"
+	@echo "  vet            go vet"
+	@echo "  lint           golangci-lint"
+	@echo "  tidy           go mod tidy"
+	@echo "  docker-up      build + start container"
+	@echo "  docker-down    stop container"
+	@echo "  docker-logs    tail container logs"
+	@echo "  docker-restart restart container"
+	@echo "  clean          remove build artifacts"
+	@echo "  ship           fmt + vet + build + test + docker-up (one command)"
+	@echo ""
+</file>
+
+<file path="README.md">
+<div align="center">
+
+# ssh-portfolio
+
+**A fully interactive terminal portfolio, served over SSH.**
+Browse my work without leaving your shell.
+
+[![Go](https://img.shields.io/badge/Go-1.25-00ADD8?style=flat-square&logo=go)](https://go.dev)
+[![Bubbletea](https://img.shields.io/badge/Bubbletea-TUI-FF69B4?style=flat-square)](https://github.com/charmbracelet/bubbletea)
+[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://hub.docker.com)
+[![Fly.io](https://img.shields.io/badge/Deployed-Fly.io-8B5CF6?style=flat-square)](https://fly.io)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+
+</div>
+
+---
+
+## Try it live
+
+```bash
+ssh -p 23234 samar-personal-portfolio.fly.dev
+```
+
+> No login. No password. Just SSH in and explore.
+
+---
+
+## What is this?
+
+Most portfolios are websites. This one is an SSH server.
+
+You connect with a standard SSH client, and instead of a shell, you land in a rich terminal UI — tabs for About, Experience, Projects, Skills, and Links. Navigate with your keyboard, cycle through color themes, scroll through content. It's a portfolio that lives where developers already are: the terminal.
+
+The About tab renders a true-color portrait photo using half-block Unicode characters (`▄`) with 24-bit ANSI color — no ASCII art, actual pixels.
+
+Built entirely in Go using the [Charmbracelet](https://charm.sh) stack:
+
+| Package | Role |
+|---|---|
+| [`wish`](https://github.com/charmbracelet/wish) | SSH server middleware |
+| [`bubbletea`](https://github.com/charmbracelet/bubbletea) | Elm-architecture TUI framework |
+| [`lipgloss`](https://github.com/charmbracelet/lipgloss) | Terminal layout & styling |
+| [`bubbles`](https://github.com/charmbracelet/bubbles) | Pre-built TUI components |
+
+---
+
+## Key bindings
+
+| Key | Action |
+|---|---|
+| `→` / `l` / `Tab` | Next tab |
+| `←` / `h` / `Shift+Tab` | Previous tab |
+| `↑` / `k` &nbsp; `↓` / `j` | Scroll |
+| `1` – `5` | Jump directly to tab |
+| `t` | Cycle theme: Dark → Light → Hacker |
+| `q` / `Ctrl+C` | Quit |
+
+---
+
+## Run locally
+
+**Prerequisites:** Go 1.21+
+
+```bash
+git clone https://github.com/your-username/ssh-portfolio
+cd ssh-portfolio
+go run .
+```
+
+Then in a second terminal:
+
+```bash
+ssh -p 23234 localhost
+```
+
+Accept the host-key fingerprint on first connection. The key is generated once and saved to `.ssh/host_key`.
+
+---
+
+## Makefile
+
+| Command | Does |
+|---|---|
+| `make build` | Compile binary |
+| `make run` | Dev server on `:23234` |
+| `make connect` | `ssh -p 23234 localhost` |
+| `make test` | Run all tests (verbose) |
+| `make test-race` | Tests with race detector |
+| `make cover` | HTML coverage report |
+| `make docker-up` | Build + start container |
+| `make docker-down` | Stop container |
+| `make docker-logs` | Tail container logs |
+| `make clean` | Remove build artifacts |
+| **`make ship`** | **fmt → vet → build → test → deploy** |
+
+---
+
+## Deploy to Fly.io (live setup)
+
+This project is deployed on [Fly.io](https://fly.io) free tier. To redeploy after changes:
+
+```bash
+fly deploy
+```
+
+### First-time setup
+
+```bash
+# install flyctl
+curl -L https://fly.io/install.sh | sh
+
+# login
+fly auth login
+
+# create app (lowercase, dashes only)
+fly apps create your-app-name
+
+# create volume for SSH host key persistence
+fly volumes create ssh_keys --region ord --size 1
+
+# deploy
+fly deploy
+
+# allocate public IPs
+fly ips allocate-v4 --shared
+fly ips allocate-v6
+```
+
+Users connect via:
+```bash
+ssh -p 23234 your-app-name.fly.dev
+```
+
+> SSH uses raw TCP — it cannot be proxied through nginx, Caddy, or Cloudflare. The port must be open directly. Fly.io handles this natively via `[[services]]` TCP config in `fly.toml`.
+
+The `fly.toml` mounts a persistent volume at `/app/.ssh` so the host key survives redeploys. Without this, clients get "host key changed" warnings on every deploy.
+
+---
+
+## Deploy with Docker (self-hosted)
+
+```bash
+docker compose up --build -d
+```
+
+The `.ssh/` volume persists the host key across restarts.
+
+---
+
+## Customise for yourself
+
+All personal data lives in one file:
+
+```
+content/data.go
+```
+
+Edit the structs there — all five views update automatically.
+
+```go
+var MyProfile = Profile{
+    Name: "Your Name",
+    Role: "Your Role",
+    Bio:  []string{"paragraph one", "paragraph two"},
+}
+```
+
+### Replace the portrait photo
+
+Swap `tui/portrait.jpg` with your own JPEG. The renderer automatically:
+- Decodes the JPEG
+- Scales to 40 cols wide preserving aspect ratio
+- Renders using half-block `▄` chars with 24-bit ANSI true color
+
+No tools needed — just replace the file.
+
+Then redeploy:
+```bash
+fly deploy
+```
+
+---
+
+## Environment variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `SSH_PORT` | `23234` | Port the SSH server listens on |
+
+---
+
+## Testing
+
+Tests across 5 files in `tests/`:
+
+| File | Covers |
+|---|---|
+| `content_test.go` | Data validation — no blank fields, valid URLs, no duplicates |
+| `model_test.go` | Tab nav, wrap-around, jump keys, quit, resize, unknown keys |
+| `views_test.go` | Every tab's rendered content, bullets, header, footer |
+| `styles_test.go` | Themes, colors, portrait rendering, `NewStyles` |
+| `keygen_test.go` | Host key file creation, permissions, PEM validity, RSA parse |
+
+```bash
+make test
+make test-race
+make cover
+```
+
+---
+
+## Project structure
+
+```
+ssh-portfolio/
+├── main.go              # SSH server setup (wish + bubbletea middleware)
+├── Makefile             # build / test / deploy targets
+├── fly.toml             # Fly.io deployment config
+├── Dockerfile           # two-stage build → ~7MB Alpine image
+├── docker-compose.yml   # local Docker setup
+├── content/
+│   └── data.go          # ← edit this to personalise
+├── tui/
+│   ├── model.go         # Bubbletea model, update loop, keybindings
+│   ├── views.go         # Tab renderers (About, Experience, Projects, Skills, Links)
+│   ├── styles.go        # Themes and lipgloss style definitions
+│   ├── ascii.go         # Portrait renderer (JPEG → half-block true color)
+│   └── portrait.jpg     # Your photo (swap to personalise)
+└── tests/
+    ├── content_test.go
+    ├── model_test.go
+    ├── views_test.go
+    ├── styles_test.go
+    └── keygen_test.go
+```
+
+---
+
+## Tech stack
+
+```
+Go  ──▶  wish  ──▶  SSH server
+                       │
+                  bubbletea  ──▶  TUI event loop
+                       │
+                  lipgloss   ──▶  layout + colour
+                       │
+                  image/jpeg ──▶  portrait → half-block pixels
+                       │
+                  content/   ──▶  your data
+```
+
+---
+
+## License
+
+MIT — fork it, adapt it, make it yours.
+
+---
+
+<div align="center">
+
+**Built by [Samardeep Singh](https://github.com/MoveFastAndBreakThings-dot)**
+
+*"Why have a website when you can have an SSH server?"*
+
+</div>
+</file>
+
+<file path="tests/content_test.go">
+package tests
+
+import (
+	"strings"
+	"testing"
+
+	"ssh-portfolio/content"
+)
+
+// ── Profile ───────────────────────────────────────────────────────────────────
+
+func TestProfile_NameNotEmpty(t *testing.T) {
+	if strings.TrimSpace(content.MyProfile.Name) == "" {
+		t.Fatal("Profile.Name is empty")
+	}
+}
+
+func TestProfile_RoleNotEmpty(t *testing.T) {
+	if strings.TrimSpace(content.MyProfile.Role) == "" {
+		t.Fatal("Profile.Role is empty")
+	}
+}
+
+func TestProfile_BioHasParagraphs(t *testing.T) {
+	if len(content.MyProfile.Bio) == 0 {
+		t.Fatal("Profile.Bio has no paragraphs")
+	}
+	for i, para := range content.MyProfile.Bio {
+		if strings.TrimSpace(para) == "" {
+			t.Errorf("Profile.Bio[%d] is blank", i)
+		}
+	}
+}
+
+// ── Jobs ──────────────────────────────────────────────────────────────────────
+
+func TestJobs_NotEmpty(t *testing.T) {
+	if len(content.Jobs) == 0 {
+		t.Fatal("Jobs slice is empty")
+	}
+}
+
+func TestJobs_RequiredFields(t *testing.T) {
+	for i, job := range content.Jobs {
+		if strings.TrimSpace(job.Title) == "" {
+			t.Errorf("Jobs[%d].Title is empty", i)
+		}
+		if strings.TrimSpace(job.Company) == "" {
+			t.Errorf("Jobs[%d].Company is empty", i)
+		}
+		if strings.TrimSpace(job.Period) == "" {
+			t.Errorf("Jobs[%d].Period is empty", i)
+		}
+	}
+}
+
+func TestJobs_BulletsNotEmpty(t *testing.T) {
+	for i, job := range content.Jobs {
+		if len(job.Bullets) == 0 {
+			t.Errorf("Jobs[%d] (%s) has no bullets", i, job.Title)
+		}
+		for j, b := range job.Bullets {
+			if strings.TrimSpace(b) == "" {
+				t.Errorf("Jobs[%d].Bullets[%d] is blank", i, j)
+			}
+		}
+	}
+}
+
+func TestJobs_TagsNotEmpty(t *testing.T) {
+	for i, job := range content.Jobs {
+		if len(job.Tags) == 0 {
+			t.Errorf("Jobs[%d] (%s) has no tags", i, job.Title)
+		}
+		for j, tag := range job.Tags {
+			if strings.TrimSpace(tag) == "" {
+				t.Errorf("Jobs[%d].Tags[%d] is blank", i, j)
+			}
+		}
+	}
+}
+
+// ── Projects ──────────────────────────────────────────────────────────────────
+
+func TestProjects_NotEmpty(t *testing.T) {
+	if len(content.Projects) == 0 {
+		t.Fatal("Projects slice is empty")
+	}
+}
+
+func TestProjects_RequiredFields(t *testing.T) {
+	for i, proj := range content.Projects {
+		if strings.TrimSpace(proj.Name) == "" {
+			t.Errorf("Projects[%d].Name is empty", i)
+		}
+		if strings.TrimSpace(proj.Description) == "" {
+			t.Errorf("Projects[%d].Description is empty", i)
+		}
+	}
+}
+
+func TestProjects_TagsNotEmpty(t *testing.T) {
+	for i, proj := range content.Projects {
+		if len(proj.Tags) == 0 {
+			t.Errorf("Projects[%d] (%s) has no tags", i, proj.Name)
+		}
+		for j, tag := range proj.Tags {
+			if strings.TrimSpace(tag) == "" {
+				t.Errorf("Projects[%d].Tags[%d] is blank", i, j)
+			}
+		}
+	}
+}
+
+func TestProjects_URLsWellFormed(t *testing.T) {
+	for i, proj := range content.Projects {
+		if proj.URL == "" {
+			continue
+		}
+		if !strings.HasPrefix(proj.URL, "http://") && !strings.HasPrefix(proj.URL, "https://") {
+			t.Errorf("Projects[%d].URL %q not http/https", i, proj.URL)
+		}
+	}
+}
+
+// ── SkillGroups ───────────────────────────────────────────────────────────────
+
+func TestSkillGroups_NotEmpty(t *testing.T) {
+	if len(content.SkillGroups) == 0 {
+		t.Fatal("SkillGroups slice is empty")
+	}
+}
+
+func TestSkillGroups_CategoryNotEmpty(t *testing.T) {
+	for i, sg := range content.SkillGroups {
+		if strings.TrimSpace(sg.Category) == "" {
+			t.Errorf("SkillGroups[%d].Category is empty", i)
+		}
+	}
+}
+
+func TestSkillGroups_EachHasItems(t *testing.T) {
+	for i, sg := range content.SkillGroups {
+		if len(sg.Items) == 0 {
+			t.Errorf("SkillGroups[%d] (%s) has no items", i, sg.Category)
+		}
+		for j, item := range sg.Items {
+			if strings.TrimSpace(item) == "" {
+				t.Errorf("SkillGroups[%d].Items[%d] is blank", i, j)
+			}
+		}
+	}
+}
+
+func TestSkillGroups_NoDuplicateCategories(t *testing.T) {
+	seen := map[string]bool{}
+	for _, sg := range content.SkillGroups {
+		if seen[sg.Category] {
+			t.Errorf("duplicate skill category: %q", sg.Category)
+		}
+		seen[sg.Category] = true
+	}
+}
+
+// ── Links ─────────────────────────────────────────────────────────────────────
+
+func TestLinks_NotEmpty(t *testing.T) {
+	if len(content.Links) == 0 {
+		t.Fatal("Links slice is empty")
+	}
+}
+
+func TestLinks_RequiredFields(t *testing.T) {
+	for i, lk := range content.Links {
+		if strings.TrimSpace(lk.Label) == "" {
+			t.Errorf("Links[%d].Label is empty", i)
+		}
+		if strings.TrimSpace(lk.URL) == "" {
+			t.Errorf("Links[%d].URL is empty", i)
+		}
+	}
+}
+
+func TestLinks_URLsWellFormed(t *testing.T) {
+	for i, lk := range content.Links {
+		if !strings.HasPrefix(lk.URL, "http://") &&
+			!strings.HasPrefix(lk.URL, "https://") &&
+			!strings.HasPrefix(lk.URL, "mailto:") {
+			t.Errorf("Links[%d] (%s) URL %q not http/https/mailto", i, lk.Label, lk.URL)
+		}
+	}
+}
+
+func TestLinks_NoDuplicateLabels(t *testing.T) {
+	seen := map[string]bool{}
+	for _, lk := range content.Links {
+		if seen[lk.Label] {
+			t.Errorf("duplicate link label: %q", lk.Label)
+		}
+		seen[lk.Label] = true
+	}
+}
+
+// ── Extracurriculars ──────────────────────────────────────────────────────────
+
+func TestExtracurriculars_NotEmpty(t *testing.T) {
+	if len(content.Extracurriculars) == 0 {
+		t.Fatal("Extracurriculars slice is empty")
+	}
+}
+
+func TestExtracurriculars_NoBlanks(t *testing.T) {
+	for i, ec := range content.Extracurriculars {
+		if strings.TrimSpace(ec) == "" {
+			t.Errorf("Extracurriculars[%d] is blank", i)
+		}
+	}
+}
+</file>
+
+<file path="tests/keygen_test.go">
+package tests
+
+import (
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/x509"
+	"encoding/pem"
+	"os"
+	"path/filepath"
+	"testing"
+)
+
+// generateHostKey mirrors the logic in main.go (unexported there).
+func generateHostKey(path string) error {
+	key, err := rsa.GenerateKey(rand.Reader, 2048) // 2048 for test speed
+	if err != nil {
+		return err
+	}
+	f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return pem.Encode(f, &pem.Block{
+		Type:  "RSA PRIVATE KEY",
+		Bytes: x509.MarshalPKCS1PrivateKey(key),
+	})
+}
+
+// ── Tests ─────────────────────────────────────────────────────────────────────
+
+func TestGenerateHostKey_CreatesFile(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "host_key")
+
+	if err := generateHostKey(path); err != nil {
+		t.Fatalf("generateHostKey returned error: %v", err)
+	}
+
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		t.Fatal("host key file was not created")
+	}
+}
+
+func TestGenerateHostKey_FileNotEmpty(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "host_key")
+
+	if err := generateHostKey(path); err != nil {
+		t.Fatal(err)
+	}
+
+	info, err := os.Stat(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if info.Size() == 0 {
+		t.Fatal("host key file is empty")
+	}
+}
+
+func TestGenerateHostKey_FilePermissions(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "host_key")
+
+	if err := generateHostKey(path); err != nil {
+		t.Fatal(err)
+	}
+
+	info, err := os.Stat(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	perm := info.Mode().Perm()
+	if perm != 0600 {
+		t.Errorf("host key permissions = %o, want 0600", perm)
+	}
+}
+
+func TestGenerateHostKey_ValidPEMBlock(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "host_key")
+
+	if err := generateHostKey(path); err != nil {
+		t.Fatal(err)
+	}
+
+	data, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	block, rest := pem.Decode(data)
+	if block == nil {
+		t.Fatal("file contains no valid PEM block")
+	}
+	if block.Type != "RSA PRIVATE KEY" {
+		t.Errorf("PEM type = %q, want RSA PRIVATE KEY", block.Type)
+	}
+	if len(rest) > 0 && len(rest) != len(data)-len(pem.EncodeToMemory(block)) {
+		t.Error("unexpected trailing data after PEM block")
+	}
+}
+
+func TestGenerateHostKey_ParseableRSAKey(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "host_key")
+
+	if err := generateHostKey(path); err != nil {
+		t.Fatal(err)
+	}
+
+	data, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	block, _ := pem.Decode(data)
+	if block == nil {
+		t.Fatal("no PEM block")
+	}
+
+	key, err := x509.ParsePKCS1PrivateKey(block.Bytes)
+	if err != nil {
+		t.Fatalf("failed to parse RSA key: %v", err)
+	}
+	if err := key.Validate(); err != nil {
+		t.Fatalf("RSA key validation failed: %v", err)
+	}
+}
+
+func TestGenerateHostKey_Idempotent_OverwritesExisting(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "host_key")
+
+	if err := generateHostKey(path); err != nil {
+		t.Fatal(err)
+	}
+	first, _ := os.ReadFile(path)
+
+	if err := generateHostKey(path); err != nil {
+		t.Fatal(err)
+	}
+	second, _ := os.ReadFile(path)
+
+	// Keys are randomly generated — second call should produce a different key.
+	if string(first) == string(second) {
+		t.Error("two generateHostKey calls produced identical keys (should be random)")
+	}
+}
+
+func TestGenerateHostKey_BadPath_ReturnsError(t *testing.T) {
+	err := generateHostKey("/nonexistent/path/host_key")
+	if err == nil {
+		t.Fatal("expected error for bad path, got nil")
+	}
+}
+</file>
+
+<file path="tests/model_test.go">
+package tests
+
+import (
+	"testing"
+
+	tea "github.com/charmbracelet/bubbletea"
+	"ssh-portfolio/tui"
+)
+
+// ── helpers ───────────────────────────────────────────────────────────────────
+
+func newReadyModel() tui.Model {
+	return tui.NewModel(120, 40)
+}
+
+func sendKey(m tui.Model, key string) tui.Model {
+	updated, _ := m.Update(tea.KeyMsg{Type: tea.KeyRunes, Runes: []rune(key)})
+	return updated.(tui.Model)
+}
+
+func sendSpecialKey(m tui.Model, kt tea.KeyType) tui.Model {
+	updated, _ := m.Update(tea.KeyMsg{Type: kt})
+	return updated.(tui.Model)
+}
+
+// ── NewModel ──────────────────────────────────────────────────────────────────
+
+func TestNewModel_ZeroSize_NotReady(t *testing.T) {
+	m := tui.NewModel(0, 0)
+	if view := m.View(); view != "\n  Connecting…" {
+		t.Errorf("zero-size model View() = %q, want connecting message", view)
+	}
+}
+
+func TestNewModel_ValidSize_ViewNotEmpty(t *testing.T) {
+	m := newReadyModel()
+	v := m.View()
+	if v == "" {
+		t.Fatal("View() is empty for a ready model")
+	}
+}
+
+func TestNewModel_ValidSize_ViewNotConnecting(t *testing.T) {
+	m := newReadyModel()
+	if m.View() == "\n  Connecting…" {
+		t.Fatal("valid-size model still shows connecting message")
+	}
+}
+
+func TestNewModel_InitReturnsNil(t *testing.T) {
+	m := newReadyModel()
+	if cmd := m.Init(); cmd != nil {
+		t.Fatal("Init() should return nil")
+	}
+}
+
+// ── Tab navigation ────────────────────────────────────────────────────────────
+
+func TestModel_TabRight_ChangesContent(t *testing.T) {
+	m := newReadyModel()
+	before := m.View()
+	m = sendKey(m, "l")
+	if m.View() == before {
+		t.Fatal("View() unchanged after right-tab navigation")
+	}
+}
+
+func TestModel_TabRight_Arrow_ChangesContent(t *testing.T) {
+	m := newReadyModel()
+	before := m.View()
+	m = sendSpecialKey(m, tea.KeyRight)
+	if m.View() == before {
+		t.Fatal("View() unchanged after KeyRight navigation")
+	}
+}
+
+func TestModel_TabRight_Tab_ChangesContent(t *testing.T) {
+	m := newReadyModel()
+	before := m.View()
+	m = sendSpecialKey(m, tea.KeyTab)
+	if m.View() == before {
+		t.Fatal("View() unchanged after Tab key navigation")
+	}
+}
+
+func TestModel_TabLeft_ChangesContent(t *testing.T) {
+	m := newReadyModel()
+	// go right first so left has somewhere to go
+	m = sendKey(m, "l")
+	after := m.View()
+	m = sendKey(m, "h")
+	if m.View() == after {
+		t.Fatal("View() unchanged after left-tab navigation")
+	}
+}
+
+func TestModel_TabWrapAround_Right(t *testing.T) {
+	m := newReadyModel()
+	start := m.View()
+	// 5 tabs — cycle all the way around
+	for i := 0; i < 5; i++ {
+		m = sendKey(m, "l")
+	}
+	if m.View() != start {
+		t.Fatal("tab right wrap-around did not return to start view")
+	}
+}
+
+func TestModel_TabWrapAround_Left(t *testing.T) {
+	m := newReadyModel()
+	start := m.View()
+	for i := 0; i < 5; i++ {
+		m = sendKey(m, "h")
+	}
+	if m.View() != start {
+		t.Fatal("tab left wrap-around did not return to start view")
+	}
+}
+
+// ── Jump to tab by number ─────────────────────────────────────────────────────
+
+func TestModel_JumpTab_SameAs_Navigation(t *testing.T) {
+	tabs := []string{"1", "2", "3", "4", "5"}
+	for _, key := range tabs {
+		m1 := newReadyModel()
+		m1 = sendKey(m1, key)
+
+		m2 := newReadyModel()
+		steps := int(key[0] - '1')
+		for i := 0; i < steps; i++ {
+			m2 = sendKey(m2, "l")
+		}
+
+		if m1.View() != m2.View() {
+			t.Errorf("jump %q view differs from sequential navigation", key)
+		}
+	}
+}
+
+func TestModel_JumpTab_1_IsAbout(t *testing.T) {
+	m := newReadyModel()
+	m = sendKey(m, "l") // move off tab 0
+	m = sendKey(m, "1") // jump back to tab 0
+	if !containsAny(m.View(), "Samardeep", "About") {
+		t.Fatal("jump to 1 should show About/profile content")
+	}
+}
+
+// ── Theme cycling ─────────────────────────────────────────────────────────────
+
+func TestModel_ThemeCycle_ChangesThemeIndex(t *testing.T) {
+	// Theme output may look identical in non-TTY environments (lipgloss strips
+	// ANSI without a color profile). Test structural behavior: cycling n times
+	// returns to original view, confirming the index wraps correctly.
+	m := newReadyModel()
+	start := m.View()
+	m = sendKey(m, "t")
+	// After one cycle the view may or may not differ; after full cycle it must match.
+	for i := 1; i < len(tui.Themes); i++ {
+		m = sendKey(m, "t")
+	}
+	if m.View() != start {
+		t.Fatal("full theme cycle did not restore original view")
+	}
+}
+
+// ── Quit ──────────────────────────────────────────────────────────────────────
+
+func TestModel_QuitKey_q_ReturnsQuitCmd(t *testing.T) {
+	m := newReadyModel()
+	_, cmd := m.Update(tea.KeyMsg{Type: tea.KeyRunes, Runes: []rune("q")})
+	assertQuitCmd(t, cmd, "q")
+}
+
+func TestModel_QuitKey_CtrlC_ReturnsQuitCmd(t *testing.T) {
+	m := newReadyModel()
+	_, cmd := m.Update(tea.KeyMsg{Type: tea.KeyCtrlC})
+	assertQuitCmd(t, cmd, "ctrl+c")
+}
+
+func assertQuitCmd(t *testing.T, cmd tea.Cmd, key string) {
+	t.Helper()
+	if cmd == nil {
+		t.Fatalf("key %q: Update returned nil cmd, expected tea.Quit", key)
+	}
+	msg := cmd()
+	if _, ok := msg.(tea.QuitMsg); !ok {
+		t.Fatalf("key %q: cmd() returned %T, expected tea.QuitMsg", key, msg)
+	}
+}
+
+// ── Window resize ─────────────────────────────────────────────────────────────
+
+func TestModel_WindowResize_UpdatesDimensions(t *testing.T) {
+	m := tui.NewModel(0, 0) // start not-ready
+	updated, cmd := m.Update(tea.WindowSizeMsg{Width: 120, Height: 40})
+	if cmd != nil {
+		t.Fatal("WindowSizeMsg returned unexpected cmd")
+	}
+	m2 := updated.(tui.Model)
+	v := m2.View()
+	if v == "\n  Connecting…" {
+		t.Fatal("after resize, model still shows connecting")
+	}
+}
+
+func TestModel_WindowResize_SmallTerminal(t *testing.T) {
+	m := newReadyModel()
+	updated, _ := m.Update(tea.WindowSizeMsg{Width: 40, Height: 10})
+	m2 := updated.(tui.Model)
+	if m2.View() == "" {
+		t.Fatal("View() empty after resize to small terminal")
+	}
+}
+
+func TestModel_WindowResize_VerySmall_DoesNotPanic(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			t.Fatalf("panic on tiny terminal: %v", r)
+		}
+	}()
+	m := newReadyModel()
+	m.Update(tea.WindowSizeMsg{Width: 1, Height: 1})
+}
+
+// ── Unhandled messages ────────────────────────────────────────────────────────
+
+func TestModel_UnknownKey_NoStateChange(t *testing.T) {
+	m := newReadyModel()
+	before := m.View()
+	// send a key that is not bound to anything
+	m = sendKey(m, "z")
+	// view should be unchanged (z is not a keybinding)
+	if m.View() != before {
+		t.Fatal("unbound key 'z' changed model state")
+	}
+}
+
+// ── helper ────────────────────────────────────────────────────────────────────
+
+func containsAny(s string, substrs ...string) bool {
+	for _, sub := range substrs {
+		if len(sub) > 0 {
+			for i := 0; i <= len(s)-len(sub); i++ {
+				if s[i:i+len(sub)] == sub {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+</file>
+
+<file path="tests/styles_test.go">
+package tests
+
+import (
+	"testing"
+
+	tea "github.com/charmbracelet/bubbletea"
+	"ssh-portfolio/tui"
+)
+
+// ── Themes ────────────────────────────────────────────────────────────────────
+
+func TestThemes_MinimumCount(t *testing.T) {
+	if len(tui.Themes) < 1 {
+		t.Fatal("Themes slice is empty")
+	}
+}
+
+func TestThemes_HaveNames(t *testing.T) {
+	for i, th := range tui.Themes {
+		if th.Name == "" {
+			t.Errorf("Themes[%d].Name is empty", i)
+		}
+	}
+}
+
+func TestThemes_NoDuplicateNames(t *testing.T) {
+	seen := map[string]bool{}
+	for _, th := range tui.Themes {
+		if seen[th.Name] {
+			t.Errorf("duplicate theme name: %q", th.Name)
+		}
+		seen[th.Name] = true
+	}
+}
+
+func TestThemes_ColorsNotEmpty(t *testing.T) {
+	for _, th := range tui.Themes {
+		if th.Accent == "" {
+			t.Errorf("Theme %q: Accent color empty", th.Name)
+		}
+		if th.Foreground == "" {
+			t.Errorf("Theme %q: Foreground color empty", th.Name)
+		}
+		if th.Background == "" {
+			t.Errorf("Theme %q: Background color empty", th.Name)
+		}
+		if th.Muted == "" {
+			t.Errorf("Theme %q: Muted color empty", th.Name)
+		}
+		if th.Dim == "" {
+			t.Errorf("Theme %q: Dim color empty", th.Name)
+		}
+		if th.Link == "" {
+			t.Errorf("Theme %q: Link color empty", th.Name)
+		}
+		if th.Border == "" {
+			t.Errorf("Theme %q: Border color empty", th.Name)
+		}
+	}
+}
+
+// ── NewStyles ─────────────────────────────────────────────────────────────────
+
+func TestNewStyles_DoesNotPanic(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			t.Fatalf("NewStyles panicked: %v", r)
+		}
+	}()
+	for _, th := range tui.Themes {
+		tui.NewStyles(th)
+	}
+}
+
+func TestThemeCycle_FullCycle_RestoresView(t *testing.T) {
+	// Structural test: cycling through all themes returns to original state.
+	// Avoids depending on ANSI output (lipgloss suppresses colors in non-TTY).
+	tKey := tea.KeyMsg{Type: tea.KeyRunes, Runes: []rune("t")}
+	m := tui.NewModel(120, 40)
+	start := m.View()
+	for range tui.Themes {
+		updated, _ := m.Update(tKey)
+		m = updated.(tui.Model)
+	}
+	if m.View() != start {
+		t.Fatal("cycling through all themes did not restore original view")
+	}
+}
+
+// ── GetAscii ──────────────────────────────────────────────────────────────────
+
+func TestGetAscii_NotEmpty(t *testing.T) {
+	for _, th := range tui.Themes {
+		art := tui.GetAscii(th)
+		if art == "" {
+			t.Errorf("GetAscii returned empty string for theme %q", th.Name)
+		}
+	}
+}
+
+func TestGetAscii_ContainsBlockChars(t *testing.T) {
+	art := tui.GetAscii(tui.Themes[0])
+	found := false
+	for _, ch := range art {
+		if ch == '▄' || ch == '▓' || ch == '▒' || ch == '░' || ch == '█' {
+			found = true
+			break
+		}
+	}
+	if !found {
+		t.Fatal("GetAscii output contains no block characters — wrong file?")
+	}
+}
+
+func TestGetAscii_DifferentThemesHaveDifferentColors(t *testing.T) {
+	if len(tui.Themes) < 2 {
+		t.Skip("need at least 2 themes")
+	}
+	// Test theme color values differ — the actual ANSI output may be identical
+	// in non-TTY environments where lipgloss strips color codes.
+	if tui.Themes[0].Dim == tui.Themes[1].Dim {
+		t.Errorf("Theme %q and %q share the same Dim color", tui.Themes[0].Name, tui.Themes[1].Name)
+	}
+}
+</file>
+
+<file path="tests/views_test.go">
+package tests
+
+import (
+	"regexp"
+	"strings"
+	"testing"
+
+	tea "github.com/charmbracelet/bubbletea"
+	"ssh-portfolio/content"
+	"ssh-portfolio/tui"
+)
+
+// stripANSI removes all ANSI escape sequences and OSC sequences from s.
+var ansiRE = regexp.MustCompile(`\x1b(?:\[[0-9;?]*[A-Za-z]|\][^\x1b]*(?:\x1b\\|\x07)|[^[])`)
+
+func stripANSI(s string) string {
+	return ansiRE.ReplaceAllString(s, "")
+}
+
+// tabView returns the stripped View() after navigating to tab index i.
+// Uses a very tall terminal so all content is visible without scrolling.
+func tabView(tabIndex int) string {
+	m := tui.NewModel(160, 2000)
+	tKey := tea.KeyMsg{Type: tea.KeyRunes, Runes: []rune("l")}
+	for i := 0; i < tabIndex; i++ {
+		updated, _ := m.Update(tKey)
+		m = updated.(tui.Model)
+	}
+	return stripANSI(m.View())
+}
+
+// ── Tab bar ───────────────────────────────────────────────────────────────────
+
+func TestView_TabBar_ContainsAllTabNames(t *testing.T) {
+	v := tabView(0)
+	for _, name := range []string{"About", "Experience", "Projects", "Skills", "Links"} {
+		if !strings.Contains(v, name) {
+			t.Errorf("tab bar missing tab name %q", name)
+		}
+	}
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+func TestView_Header_ContainsVersion(t *testing.T) {
+	v := tabView(0)
+	if !strings.Contains(v, "v1.0.0") {
+		t.Fatal("header missing version string v1.0.0")
+	}
+}
+
+func TestView_Header_ContainsDomain(t *testing.T) {
+	v := tabView(0)
+	if !strings.Contains(v, "samar.com") {
+		t.Fatal("header missing domain samar.com")
+	}
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+
+func TestView_Footer_ContainsKeyHints(t *testing.T) {
+	v := tabView(0)
+	for _, hint := range []string{"scroll", "tabs", "theme", "quit"} {
+		if !strings.Contains(v, hint) {
+			t.Errorf("footer missing hint %q", hint)
+		}
+	}
+}
+
+// ── About tab ─────────────────────────────────────────────────────────────────
+
+func TestView_About_ContainsName(t *testing.T) {
+	v := tabView(0)
+	if !strings.Contains(v, content.MyProfile.Name) {
+		t.Fatalf("About tab missing name %q", content.MyProfile.Name)
+	}
+}
+
+func TestView_About_ContainsRole(t *testing.T) {
+	v := tabView(0)
+	// Role may be word-wrapped; check first word chunk that won't span a wrap.
+	roleSnippet := "Engineering Student"
+	if !strings.Contains(v, roleSnippet) {
+		t.Fatalf("About tab missing role snippet %q", roleSnippet)
+	}
+}
+
+func TestView_About_ContainsBioText(t *testing.T) {
+	v := tabView(0)
+	// First 20 chars of first bio paragraph should appear somewhere in the view.
+	if len(content.MyProfile.Bio) == 0 {
+		t.Skip("no bio paragraphs")
+	}
+	snippet := content.MyProfile.Bio[0][:20]
+	if !strings.Contains(v, snippet) {
+		t.Fatalf("About tab missing bio snippet %q", snippet)
+	}
+}
+
+func TestView_About_ContainsHighlightsSection(t *testing.T) {
+	v := tabView(0)
+	if !strings.Contains(v, "Highlights") {
+		t.Fatal("About tab missing Highlights section")
+	}
+}
+
+func TestView_About_ContainsExtracurriculars(t *testing.T) {
+	if len(content.Extracurriculars) == 0 {
+		t.Skip("no extracurriculars")
+	}
+	v := tabView(0)
+	// Check at least the first extracurricular appears.
+	snippet := content.Extracurriculars[0][:15]
+	if !strings.Contains(v, snippet) {
+		t.Fatalf("About tab missing extracurricular snippet %q", snippet)
+	}
+}
+
+func TestView_About_WideTerminal_HasAsciiAndText_SameLine(t *testing.T) {
+	// Wide terminal (160+) should render side-by-side.
+	// The profile name and ascii art should both appear in the output.
+	m := tui.NewModel(200, 50)
+	v := stripANSI(m.View())
+	if !strings.Contains(v, content.MyProfile.Name) {
+		t.Fatal("wide About tab missing profile name")
+	}
+	if !strings.Contains(v, "▄") {
+		t.Fatal("wide About tab missing portrait half-block chars")
+	}
+}
+
+func TestView_About_NarrowTerminal_StillRendersName(t *testing.T) {
+	// Narrow + very tall so we can see past the 48-line ascii art.
+	m := tui.NewModel(60, 2000)
+	v := stripANSI(m.View())
+	if !strings.Contains(v, content.MyProfile.Name) {
+		t.Fatal("narrow About tab missing profile name")
+	}
+}
+
+// ── Experience tab ────────────────────────────────────────────────────────────
+
+func TestView_Experience_ContainsJobTitles(t *testing.T) {
+	v := tabView(1)
+	for _, job := range content.Jobs {
+		if !strings.Contains(v, job.Title) {
+			t.Errorf("Experience tab missing job title %q", job.Title)
+		}
+	}
+}
+
+func TestView_Experience_ContainsCompanies(t *testing.T) {
+	v := tabView(1)
+	for _, job := range content.Jobs {
+		// Company string may be long; check a 15-char prefix.
+		snippet := job.Company
+		if len(snippet) > 15 {
+			snippet = snippet[:15]
+		}
+		if !strings.Contains(v, snippet) {
+			t.Errorf("Experience tab missing company snippet %q", snippet)
+		}
+	}
+}
+
+func TestView_Experience_ContainsTags(t *testing.T) {
+	v := tabView(1)
+	for _, job := range content.Jobs {
+		for _, tag := range job.Tags {
+			if !strings.Contains(v, tag) {
+				t.Errorf("Experience tab missing tag %q (job: %s)", tag, job.Title)
+			}
+		}
+	}
+}
+
+func TestView_Experience_ContainsBulletMarkers(t *testing.T) {
+	v := tabView(1)
+	if !strings.Contains(v, "•") {
+		t.Fatal("Experience tab has no bullet markers (•)")
+	}
+}
+
+// ── Projects tab ──────────────────────────────────────────────────────────────
+
+func TestView_Projects_ContainsProjectNames(t *testing.T) {
+	v := tabView(2)
+	for _, proj := range content.Projects {
+		snippet := proj.Name
+		if len(snippet) > 20 {
+			snippet = snippet[:20]
+		}
+		if !strings.Contains(v, snippet) {
+			t.Errorf("Projects tab missing project name snippet %q", snippet)
+		}
+	}
+}
+
+func TestView_Projects_ContainsTags(t *testing.T) {
+	v := tabView(2)
+	for _, proj := range content.Projects {
+		for _, tag := range proj.Tags {
+			if !strings.Contains(v, tag) {
+				t.Errorf("Projects tab missing tag %q (project: %s)", tag, proj.Name)
+			}
+		}
+	}
+}
+
+func TestView_Projects_ContainsBulletMarkers(t *testing.T) {
+	v := tabView(2)
+	if !strings.Contains(v, "•") {
+		t.Fatal("Projects tab has no bullet markers (•)")
+	}
+}
+
+func TestView_Projects_EventBadgeVisible(t *testing.T) {
+	v := tabView(2)
+	for _, proj := range content.Projects {
+		if proj.Event == "" {
+			continue
+		}
+		if !strings.Contains(v, proj.Event) {
+			t.Errorf("Projects tab missing event badge %q", proj.Event)
+		}
+	}
+}
+
+// ── Skills tab ────────────────────────────────────────────────────────────────
+
+func TestView_Skills_ContainsCategories(t *testing.T) {
+	v := tabView(3)
+	for _, sg := range content.SkillGroups {
+		if !strings.Contains(v, sg.Category) {
+			t.Errorf("Skills tab missing category %q", sg.Category)
+		}
+	}
+}
+
+func TestView_Skills_ContainsItems(t *testing.T) {
+	v := tabView(3)
+	for _, sg := range content.SkillGroups {
+		for _, item := range sg.Items {
+			if !strings.Contains(v, item) {
+				t.Errorf("Skills tab missing item %q", item)
+			}
+		}
+	}
+}
+
+func TestView_Skills_ContainsBulletMarkers(t *testing.T) {
+	v := tabView(3)
+	if !strings.Contains(v, "•") {
+		t.Fatal("Skills tab has no bullet markers (•)")
+	}
+}
+
+// ── Links tab ─────────────────────────────────────────────────────────────────
+
+func TestView_Links_ContainsLabels(t *testing.T) {
+	v := tabView(4)
+	for _, lk := range content.Links {
+		if !strings.Contains(v, lk.Label) {
+			t.Errorf("Links tab missing label %q", lk.Label)
+		}
+	}
+}
+
+func TestView_Links_ContainsURLs(t *testing.T) {
+	v := tabView(4)
+	for _, lk := range content.Links {
+		display := lk.URL
+		if strings.HasPrefix(display, "mailto:") {
+			display = strings.TrimPrefix(display, "mailto:")
+		}
+		if !strings.Contains(v, display) {
+			t.Errorf("Links tab missing URL %q", display)
+		}
+	}
+}
+
+func TestView_Links_ContainsArrow(t *testing.T) {
+	v := tabView(4)
+	if !strings.Contains(v, "→") {
+		t.Fatal("Links tab missing → arrow")
+	}
+}
+</file>
+
+<file path="tui/ascii_art.txt">
+▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▒▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓██▓██████████████████▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓█████████████████████████████▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓████████████████████████████████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓███▓▒▒▓▓█████████████████████████▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▒░░░░░░▒▒▒▓▓██████████████████████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▒░░░░░░░▒▒▒▒▒▓▓▓█████████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒░░░░░░░▒▒▒▒▒▒▒▓▓█████████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▓▒▒▒▓▓▓▓▒▒▒▒▓▓███████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▒▓▓▓▒▒▒▒▒▓▓████████████▓███████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░▒▒▓▓▓████████████▓▓▓███████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒░░░░░▒▒▒▒▒▓▓▓▓█████▓████▓▓████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▓▓▒░░▒▒▓▓▓▓▓█████████▓▓▓▓█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓████▓▒▒▓▒▒▓▓▓▓▓██████████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▒▒▓▓▓▓▒▒▓▓▓▓██████████████████████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒▒▓▓████████████████████████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▓▓▓█████████████████████████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒▒▓▓█████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░▒▒▒▒▒▒▒▓▓█████████████▓▓▓▒▓▒▓▓▓▓▓▓▓▓▓▓▓███▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒░░░░░░░░▒▒░░░░░░░░▒▒▓███████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒░░░░░░░▒▒▒░░░░░░░░░░▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████████▓▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█████████████▓▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████████████████████▓▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███████████████████████▓▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███████████████████████████▓▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█████████████████████████████▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓██▓███████████████████████████████▓
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███████████████████████████████████████
+▒▒▒▒▒▒▒▒░░░░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓█▓▓▓▓▓██████▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████████
+▒▒▒▒▒░░░░░░░░░░░▒░░░░░░░░░░░▒▒▒▒▓▒▓▓█▓▓█▓█▓██▓▓▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░▒░▒▒▒▓▒▓▒▓▒▓▓▓▓▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░▒▒░▒░▒▒▒▒▒▓▓▓▓▓▓▓▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░▒▒░▒░▒░▒▒▒▓▓▓▓▓▓▓▓▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▒░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░▒░▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▒░▒▓▓▓▓▓▓▓▓▓▓█████████▓▓▓▓▓▓▓▓▓
+░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░▒▒▒▒▒▒▒▓▒▒▒▓▓▓▓▓▓▓▓▓▒▒▒████████████████████████████
+░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▒▒▒▓▒▓▓▓▓▓▓▓▓██████▓██████████████████████████████
+░░░░░░░░░░▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓██████████████████████████████████████
+░░░░░░░░░▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓█▓█████████████████████████████████████████████▓▓████
+░░░░░░░░▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓██████████████████████████████████████████████████████
+░░░░░░░░▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓████████████████████████████████████████████████████
+</file>
+
+<file path="tui/ascii.go">
+package tui
+
+import (
+	"bytes"
+	"fmt"
+	"image"
+	_ "image/jpeg"
+	"strings"
+
+	_ "embed"
+)
+
+//go:embed portrait.jpg
+var portraitJPG []byte
+
+const portraitCols = 40
+
+// GetAscii renders portrait.jpg as a half-block true-colour image.
+// Each character row covers 2 pixel rows: top → background, bottom → foreground, char = ▄.
+func GetAscii(_ Theme) string {
+	img, _, err := image.Decode(bytes.NewReader(portraitJPG))
+	if err != nil {
+		return ""
+	}
+
+	b := img.Bounds()
+	srcW := b.Max.X - b.Min.X
+	srcH := b.Max.Y - b.Min.Y
+
+	// Preserve aspect ratio assuming terminal chars are ~2:1 (h:w).
+	targetW := portraitCols
+	targetH := targetW * srcH / srcW / 2
+	if targetH < 1 {
+		targetH = 1
+	}
+	pixH := targetH * 2
+
+	scaled := resizeNearest(img, targetW, pixH)
+
+	var sb strings.Builder
+	for row := 0; row < targetH; row++ {
+		for col := 0; col < targetW; col++ {
+			tR, tG, tB, _ := scaled.At(col, row*2).RGBA()
+			bR, bG, bB, _ := scaled.At(col, row*2+1).RGBA()
+			fmt.Fprintf(&sb, "\x1b[38;2;%d;%d;%dm\x1b[48;2;%d;%d;%dm▄",
+				bR>>8, bG>>8, bB>>8,
+				tR>>8, tG>>8, tB>>8)
+		}
+		if row < targetH-1 {
+			sb.WriteString("\x1b[0m\n")
+		} else {
+			sb.WriteString("\x1b[0m")
+		}
+	}
+
+	return sb.String()
+}
+
+func resizeNearest(src image.Image, w, h int) image.Image {
+	dst := image.NewRGBA(image.Rect(0, 0, w, h))
+	b := src.Bounds()
+	sw := b.Max.X - b.Min.X
+	sh := b.Max.Y - b.Min.Y
+	for y := 0; y < h; y++ {
+		for x := 0; x < w; x++ {
+			sx := x*sw/w + b.Min.X
+			sy := y*sh/h + b.Min.Y
+			dst.Set(x, y, src.At(sx, sy))
+		}
+	}
+	return dst
+}
+</file>
+
+<file path="tui/model.go">
+package tui
+
+import (
+	"github.com/charmbracelet/bubbles/viewport"
+	tea "github.com/charmbracelet/bubbletea"
+)
+
+const (
+	headerHeight = 1
+	tabBarHeight = 2 // tab names + rule
+	footerHeight = 1
+)
+
+// Model is the bubbletea application model — one instance per SSH session.
+type Model struct {
+	tabs       []string
+	activeTab  int
+	viewport   viewport.Model
+	theme      Theme
+	themeIndex int
+	width      int
+	height     int
+	ready      bool
+}
+
+// NewModel creates a fresh model.  width/height come from the SSH PTY.
+func NewModel(width, height int) Model {
+	m := Model{
+		tabs:       []string{"About", "Experience", "Projects", "Skills", "Links"},
+		activeTab:  0,
+		theme:      Themes[0],
+		themeIndex: 0,
+		width:      width,
+		height:     height,
+	}
+	if width > 0 && height > 0 {
+		vh := vpHeight(height)
+		m.viewport = viewport.New(width, vh)
+		m.viewport.SetContent(renderActiveTab(m))
+		m.ready = true
+	}
+	return m
+}
+
+func vpHeight(totalH int) int {
+	vh := totalH - headerHeight - tabBarHeight - footerHeight - 1
+	if vh < 1 {
+		return 1
+	}
+	return vh
+}
+
+// ── bubbletea interface ───────────────────────────────────────────────────────
+
+func (m Model) Init() tea.Cmd { return nil }
+
+func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	switch msg := msg.(type) {
+
+	case tea.WindowSizeMsg:
+		m.width = msg.Width
+		m.height = msg.Height
+		vh := vpHeight(msg.Height)
+		if !m.ready {
+			m.viewport = viewport.New(msg.Width, vh)
+			m.ready = true
+		} else {
+			m.viewport.Width = msg.Width
+			m.viewport.Height = vh
+		}
+		m.viewport.SetContent(renderActiveTab(m))
+		return m, nil
+
+	case tea.KeyMsg:
+		switch msg.String() {
+
+		// Tab navigation
+		case "tab", "right", "l":
+			m.activeTab = (m.activeTab + 1) % len(m.tabs)
+			m.viewport.GotoTop()
+			m.viewport.SetContent(renderActiveTab(m))
+			return m, nil
+
+		case "shift+tab", "left", "h":
+			m.activeTab = (m.activeTab - 1 + len(m.tabs)) % len(m.tabs)
+			m.viewport.GotoTop()
+			m.viewport.SetContent(renderActiveTab(m))
+			return m, nil
+
+		// Theme cycling
+		case "t":
+			m.themeIndex = (m.themeIndex + 1) % len(Themes)
+			m.theme = Themes[m.themeIndex]
+			m.viewport.SetContent(renderActiveTab(m))
+			return m, nil
+
+		// Jump to tab by number
+		case "1":
+			m = jumpTab(m, 0)
+			return m, nil
+		case "2":
+			m = jumpTab(m, 1)
+			return m, nil
+		case "3":
+			m = jumpTab(m, 2)
+			return m, nil
+		case "4":
+			m = jumpTab(m, 3)
+			return m, nil
+		case "5":
+			m = jumpTab(m, 4)
+			return m, nil
+
+		// Quit
+		case "q", "ctrl+c":
+			return m, tea.Quit
+		}
+	}
+
+	// Delegate all other messages (scroll keys, mouse, etc.) to the viewport.
+	var cmd tea.Cmd
+	m.viewport, cmd = m.viewport.Update(msg)
+	return m, cmd
+}
+
+func (m Model) View() string {
+	if !m.ready {
+		return "\n  Connecting…"
+	}
+	s := NewStyles(m.theme)
+	return renderHeader(m, s) + "\n" +
+		renderTabBar(m, s) + "\n" +
+		m.viewport.View() + "\n" +
+		renderFooter(m, s)
+}
+
+// ── helpers ───────────────────────────────────────────────────────────────────
+
+func jumpTab(m Model, idx int) Model {
+	if idx >= 0 && idx < len(m.tabs) {
+		m.activeTab = idx
+		m.viewport.GotoTop()
+		m.viewport.SetContent(renderActiveTab(m))
+	}
+	return m
+}
+</file>
+
+<file path="tui/styles.go">
+package tui
+
+import "github.com/charmbracelet/lipgloss"
+
+// Theme holds all color tokens for a named palette.
+type Theme struct {
+	Name       string
+	Background lipgloss.Color
+	Foreground lipgloss.Color
+	Accent     lipgloss.Color
+	Muted      lipgloss.Color
+	Border     lipgloss.Color
+	Link       lipgloss.Color
+	Dim        lipgloss.Color
+}
+
+// Themes lists the three available palettes (index matches themeIndex).
+var Themes = []Theme{
+	{
+		Name:       "Dark",
+		Background: lipgloss.Color("#0d0d0d"),
+		Foreground: lipgloss.Color("#e0e0e0"),
+		Accent:     lipgloss.Color("#ff6b35"),
+		Muted:      lipgloss.Color("#888888"),
+		Border:     lipgloss.Color("#333333"),
+		Link:       lipgloss.Color("#4a9eff"),
+		Dim:        lipgloss.Color("#555555"),
+	},
+	{
+		Name:       "Light",
+		Background: lipgloss.Color("#f5f5f0"),
+		Foreground: lipgloss.Color("#1a1a1a"),
+		Accent:     lipgloss.Color("#c0392b"),
+		Muted:      lipgloss.Color("#666666"),
+		Border:     lipgloss.Color("#cccccc"),
+		Link:       lipgloss.Color("#2563eb"),
+		Dim:        lipgloss.Color("#999999"),
+	},
+	{
+		Name:       "Hacker",
+		Background: lipgloss.Color("#000000"),
+		Foreground: lipgloss.Color("#00ff41"),
+		Accent:     lipgloss.Color("#00ff41"),
+		Muted:      lipgloss.Color("#006600"),
+		Border:     lipgloss.Color("#003300"),
+		Link:       lipgloss.Color("#00ff41"),
+		Dim:        lipgloss.Color("#004400"),
+	},
+}
+
+// Styles is a compiled set of lipgloss styles derived from a Theme.
+type Styles struct {
+	TabActive    lipgloss.Style
+	TabInactive  lipgloss.Style
+	Header       lipgloss.Style
+	Footer       lipgloss.Style
+	SectionTitle lipgloss.Style
+	JobTitle     lipgloss.Style
+	CompanyText  lipgloss.Style
+	DateText     lipgloss.Style
+	BulletText   lipgloss.Style
+	Tag          lipgloss.Style
+	LinkText     lipgloss.Style
+	AsciiStyle   lipgloss.Style
+	ContentPad   lipgloss.Style
+}
+
+// NewStyles builds all styles from the given theme.
+func NewStyles(t Theme) Styles {
+	return Styles{
+		TabActive:   lipgloss.NewStyle().Foreground(t.Accent).Bold(true),
+		TabInactive: lipgloss.NewStyle().Foreground(t.Muted),
+		Header:      lipgloss.NewStyle().Foreground(t.Dim),
+		Footer:      lipgloss.NewStyle().Foreground(t.Muted),
+		SectionTitle: lipgloss.NewStyle().
+			Foreground(t.Accent).
+			Bold(true).
+			MarginTop(1),
+		JobTitle:    lipgloss.NewStyle().Foreground(t.Accent).Bold(true),
+		CompanyText: lipgloss.NewStyle().Foreground(t.Muted),
+		DateText:    lipgloss.NewStyle().Foreground(t.Dim),
+		BulletText:  lipgloss.NewStyle().Foreground(t.Foreground),
+		Tag: lipgloss.NewStyle().
+			Border(lipgloss.RoundedBorder()).
+			BorderForeground(t.Muted).
+			Foreground(t.Muted).
+			Padding(0, 1),
+		LinkText:   lipgloss.NewStyle().Foreground(t.Link).Underline(true),
+		AsciiStyle: lipgloss.NewStyle().Foreground(t.Dim),
+		ContentPad: lipgloss.NewStyle().PaddingLeft(2),
+	}
+}
+</file>
+
+<file path="tui/views.go">
+package tui
+
+import (
+	"fmt"
+	"strings"
+
+	"github.com/charmbracelet/lipgloss"
+	"ssh-portfolio/content"
+)
+
+// ── Fixed chrome ─────────────────────────────────────────────────────────────
+
+func renderHeader(m Model, s Styles) string {
+	left := s.Header.Render("  v1.0.0")
+
+	bracketAccent := lipgloss.NewStyle().Foreground(m.theme.Accent)
+	bracketMuted := lipgloss.NewStyle().Foreground(m.theme.Muted)
+	right := bracketAccent.Render("[") +
+		bracketMuted.Render("  ssh.samar.com  ") +
+		bracketAccent.Render("]")
+
+	lw := lipgloss.Width(left)
+	rw := lipgloss.Width(right)
+	gap := m.width - lw - rw
+	if gap < 0 {
+		gap = 0
+	}
+	return left + strings.Repeat(" ", gap) + right
+}
+
+func renderTabBar(m Model, s Styles) string {
+	var parts []string
+	for i, label := range m.tabs {
+		if i == m.activeTab {
+			parts = append(parts, s.TabActive.Render(label))
+		} else {
+			parts = append(parts, s.TabInactive.Render(label))
+		}
+	}
+	tabLine := "  " + strings.Join(parts, "   ")
+	rule := lipgloss.NewStyle().Foreground(m.theme.Dim).Render(
+		strings.Repeat("─", m.width),
+	)
+	return tabLine + "\n" + rule
+}
+
+func renderFooter(m Model, s Styles) string {
+	return s.Footer.Render("  ↑↓ scroll   ←→ / hl tabs   1-5 jump   t theme   q quit")
+}
+
+// ── Tab dispatcher ────────────────────────────────────────────────────────────
+
+func renderActiveTab(m Model) string {
+	switch m.activeTab {
+	case 0:
+		return renderAbout(m)
+	case 1:
+		return renderExperience(m)
+	case 2:
+		return renderProjects(m)
+	case 3:
+		return renderSkills(m)
+	case 4:
+		return renderLinks(m)
+	}
+	return ""
+}
+
+// ── About ─────────────────────────────────────────────────────────────────────
+
+func renderAbout(m Model) string {
+	nameStyle := lipgloss.NewStyle().Foreground(m.theme.Accent).Bold(true)
+	roleStyle := lipgloss.NewStyle().Foreground(m.theme.Muted)
+	dimStyle := lipgloss.NewStyle().Foreground(m.theme.Dim)
+	hiStyle := lipgloss.NewStyle().Foreground(m.theme.Accent).Bold(true)
+
+	asciiBlock := GetAscii(m.theme)
+	asciiW := lipgloss.Width(asciiBlock)
+
+	const gap = 3
+	textW := m.width - asciiW - gap - 2
+	sideBySide := textW >= 30
+
+	if sideBySide {
+		bioStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground).Width(textW)
+		var textLines []string
+		textLines = append(textLines, nameStyle.Render(content.MyProfile.Name))
+		textLines = append(textLines, roleStyle.Render(content.MyProfile.Role))
+		textLines = append(textLines, "")
+		for i, para := range content.MyProfile.Bio {
+			textLines = append(textLines, bioStyle.Render(para))
+			if i < len(content.MyProfile.Bio)-1 {
+				textLines = append(textLines, "")
+			}
+		}
+		textLines = append(textLines, "")
+		textLines = append(textLines, hiStyle.Render("Highlights"))
+		for _, ec := range content.Extracurriculars {
+			textLines = append(textLines, dimStyle.Render("· ")+dimStyle.Render(ec))
+		}
+		textBlock := strings.Join(textLines, "\n")
+		return lipgloss.JoinHorizontal(lipgloss.Top, asciiBlock, strings.Repeat(" ", gap), textBlock)
+	}
+
+	// narrow terminal fallback: stacked
+	bioWidth := m.width - 4
+	if bioWidth < 30 {
+		bioWidth = 30
+	}
+	bioStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground).Width(bioWidth)
+
+	var lines []string
+	lines = append(lines, asciiBlock)
+	lines = append(lines, "")
+	lines = append(lines, "  "+nameStyle.Render(content.MyProfile.Name))
+	lines = append(lines, "  "+roleStyle.Render(content.MyProfile.Role))
+	lines = append(lines, "")
+	for i, para := range content.MyProfile.Bio {
+		lines = append(lines, "  "+bioStyle.Render(para))
+		if i < len(content.MyProfile.Bio)-1 {
+			lines = append(lines, "")
+		}
+	}
+	lines = append(lines, "")
+	lines = append(lines, "  "+hiStyle.Render("Highlights"))
+	for _, ec := range content.Extracurriculars {
+		lines = append(lines, "  "+dimStyle.Render("·")+" "+dimStyle.Render(ec))
+	}
+	return strings.Join(lines, "\n")
+}
+
+// ── Experience ────────────────────────────────────────────────────────────────
+
+func renderExperience(m Model) string {
+	s := NewStyles(m.theme)
+	bulletAccent := lipgloss.NewStyle().Foreground(m.theme.Accent).Render("›")
+	dimRule := lipgloss.NewStyle().Foreground(m.theme.Dim).Render(
+		strings.Repeat("─", m.width-4),
+	)
+
+	bulletWidth := m.width - 8
+	if bulletWidth < 20 {
+		bulletWidth = 20
+	}
+	bulletStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground).Width(bulletWidth)
+
+	var sections []string
+	for _, job := range content.Jobs {
+		var lines []string
+
+		// Title line: job title left, period right-aligned
+		titleStr := s.JobTitle.Render(job.Title)
+		periodStr := s.DateText.Render(job.Period)
+		gap := m.width - 4 - lipgloss.Width(titleStr) - lipgloss.Width(periodStr)
+		if gap < 1 {
+			gap = 1
+		}
+		lines = append(lines, "  "+titleStr+strings.Repeat(" ", gap)+periodStr)
+		lines = append(lines, "  "+s.CompanyText.Render(job.Company))
+		lines = append(lines, "")
+
+		for _, b := range job.Bullets {
+			lines = append(lines, "  "+bulletAccent+" "+bulletStyle.Render(b))
+		}
+		lines = append(lines, "")
+
+		// Tech bullets
+		tagStyle := lipgloss.NewStyle().Foreground(m.theme.Muted)
+		tagAccent := lipgloss.NewStyle().Foreground(m.theme.Accent)
+		for _, t := range job.Tags {
+			lines = append(lines, "    "+tagAccent.Render("•")+" "+tagStyle.Render(t))
+		}
+
+		sections = append(sections, strings.Join(lines, "\n"))
+	}
+
+	return strings.Join(sections, "\n\n  "+dimRule+"\n\n")
+}
+
+// ── Projects ──────────────────────────────────────────────────────────────────
+
+func renderProjects(m Model) string {
+	nameStyle := lipgloss.NewStyle().Foreground(m.theme.Accent).Bold(true)
+	eventStyle := lipgloss.NewStyle().Foreground(m.theme.Dim)
+	arrowStyle := lipgloss.NewStyle().Foreground(m.theme.Accent)
+	linkStyle := lipgloss.NewStyle().Foreground(m.theme.Link)
+
+	descWidth := m.width - 4
+	if descWidth < 20 {
+		descWidth = 20
+	}
+	descStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground).Width(descWidth)
+
+	var sections []string
+	for _, proj := range content.Projects {
+		var lines []string
+
+		header := nameStyle.Render(proj.Name)
+		if proj.Event != "" {
+			header += "  " + eventStyle.Render("["+proj.Event+"]")
+		}
+		lines = append(lines, "  "+header)
+		lines = append(lines, "  "+descStyle.Render(proj.Description))
+
+		tagStyle := lipgloss.NewStyle().Foreground(m.theme.Muted)
+		tagAccentStyle := lipgloss.NewStyle().Foreground(m.theme.Accent)
+		for _, t := range proj.Tags {
+			lines = append(lines, "    "+tagAccentStyle.Render("•")+" "+tagStyle.Render(t))
+		}
+		if proj.URL != "" {
+			arrow := arrowStyle.Render("→")
+			urlRendered := linkStyle.Render(osc8Link(proj.URL, proj.URL))
+			lines = append(lines, "  "+arrow+"  "+urlRendered)
+		}
+
+		sections = append(sections, strings.Join(lines, "\n"))
+	}
+	return strings.Join(sections, "\n\n")
+}
+
+// ── Skills ────────────────────────────────────────────────────────────────────
+
+func renderSkills(m Model) string {
+	_ = NewStyles(m.theme)
+	catStyle := lipgloss.NewStyle().Foreground(m.theme.Accent).Bold(true)
+	itemStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground)
+	dotStyle := lipgloss.NewStyle().Foreground(m.theme.Accent)
+
+	var lines []string
+	for _, group := range content.SkillGroups {
+		lines = append(lines, "  "+catStyle.Render(group.Category))
+		for _, item := range group.Items {
+			lines = append(lines, "    "+dotStyle.Render("•")+" "+itemStyle.Render(item))
+		}
+		lines = append(lines, "")
+	}
+	return strings.Join(lines, "\n")
+}
+
+// ── Links ─────────────────────────────────────────────────────────────────────
+
+func renderLinks(m Model) string {
+	s := NewStyles(m.theme)
+	arrowStyle := lipgloss.NewStyle().Foreground(m.theme.Accent)
+	labelStyle := lipgloss.NewStyle().Foreground(m.theme.Muted).Width(12)
+	noteStyle := lipgloss.NewStyle().Foreground(m.theme.Dim)
+
+	var lines []string
+	lines = append(lines, "")
+
+	for _, lk := range content.Links {
+		arrow := arrowStyle.Render("→")
+		label := labelStyle.Render(lk.Label)
+
+		displayURL := lk.URL
+		if strings.HasPrefix(lk.URL, "mailto:") {
+			displayURL = strings.TrimPrefix(lk.URL, "mailto:")
+		}
+
+		// OSC 8 hyperlink wrapping the lipgloss-styled display text
+		styledURL := s.LinkText.Render(displayURL)
+		hyperlink := osc8Link(lk.URL, styledURL)
+
+		lines = append(lines, fmt.Sprintf("  %s  %s  %s", arrow, label, hyperlink))
+	}
+
+	lines = append(lines, "")
+	lines = append(lines, "  "+noteStyle.Render("( links are clickable in iTerm2, WezTerm, Kitty )"))
+	return strings.Join(lines, "\n")
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+// osc8Link wraps displayText in an OSC 8 hyperlink escape for terminals that
+// support it (iTerm2, WezTerm, Kitty, …).
+func osc8Link(url, displayText string) string {
+	return "\033]8;;" + url + "\033\\" + displayText + "\033]8;;\033\\"
+}
+</file>
+
+<file path="update">
+deb [trusted=yes] https://apt.fury.io/ascii-image-converter/ /
+</file>
+
+</files>

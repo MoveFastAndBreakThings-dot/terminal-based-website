@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  ssh-portfolio:
+    build: .
+    ports:
+      - "23234:23234"
+    volumes:
+      - ./.ssh:/app/.ssh
+    restart: unless-stopped
+    environment:
+      - SSH_PORT=23234

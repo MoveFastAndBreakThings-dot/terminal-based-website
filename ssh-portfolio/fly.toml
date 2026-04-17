@@ -1,0 +1,21 @@
+app = "samar-personal-portfolio"
+primary_region = "ord"
+
+[build]
+
+[env]
+  SSH_PORT = "23234"
+
+[[services]]
+  internal_port = 23234
+  protocol = "tcp"
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[services.ports]]
+    port = 23234
+
+[[mounts]]
+  source = "ssh_keys"
+  destination = "/app/.ssh"
