@@ -2,6 +2,7 @@ package tui
 
 import (
 	"bytes"
+	"encoding/base64"
 	"fmt"
 	"image"
 	_ "image/jpeg"
@@ -9,6 +10,21 @@ import (
 
 	_ "embed"
 )
+
+// InlineImageRows is the terminal row height reserved for the inline portrait.
+const InlineImageRows = 22
+
+// GetInlineImage returns an iTerm2/WezTerm/Ghostty inline image escape sequence
+// for portrait.jpg. Falls back to empty string if image can't be decoded.
+func GetInlineImage() string {
+	// Verify the image is valid before sending.
+	if _, _, err := image.Decode(bytes.NewReader(portraitJPG)); err != nil {
+		return ""
+	}
+	encoded := base64.StdEncoding.EncodeToString(portraitJPG)
+	return fmt.Sprintf("\033]1337;File=inline=1;width=40;height=%d;preserveAspectRatio=1:%s\a",
+		InlineImageRows, encoded)
+}
 
 //go:embed portrait.jpg
 var portraitJPG []byte

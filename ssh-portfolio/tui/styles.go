@@ -68,7 +68,7 @@ type Styles struct {
 // NewStyles builds all styles from the given theme.
 func NewStyles(t Theme) Styles {
 	return Styles{
-		TabActive:   lipgloss.NewStyle().Foreground(t.Accent).Bold(true),
+		TabActive:   lipgloss.NewStyle().Background(t.Accent).Foreground(t.Background).Bold(true).Blink(true).PaddingLeft(1).PaddingRight(1),
 		TabInactive: lipgloss.NewStyle().Foreground(t.Muted),
 		Header:      lipgloss.NewStyle().Foreground(t.Dim),
 		Footer:      lipgloss.NewStyle().Foreground(t.Muted),

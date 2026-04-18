@@ -74,14 +74,12 @@ func renderAbout(m Model) string {
 	dimStyle := lipgloss.NewStyle().Foreground(m.theme.Dim)
 	hiStyle := lipgloss.NewStyle().Foreground(m.theme.Accent).Bold(true)
 
-	asciiBlock := GetAscii(m.theme)
-	asciiW := lipgloss.Width(asciiBlock)
+	imgBlock := GetAscii(m.theme)
+	imgW := lipgloss.Width(imgBlock)
 
 	const gap = 3
-	textW := m.width - asciiW - gap - 2
-	sideBySide := textW >= 30
-
-	if sideBySide {
+	textW := m.width - imgW - gap - 2
+	if textW >= 30 {
 		bioStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground).Width(textW)
 		var textLines []string
 		textLines = append(textLines, nameStyle.Render(content.MyProfile.Name))
@@ -98,19 +96,17 @@ func renderAbout(m Model) string {
 		for _, ec := range content.Extracurriculars {
 			textLines = append(textLines, dimStyle.Render("· ")+dimStyle.Render(ec))
 		}
-		textBlock := strings.Join(textLines, "\n")
-		return lipgloss.JoinHorizontal(lipgloss.Top, asciiBlock, strings.Repeat(" ", gap), textBlock)
+		return lipgloss.JoinHorizontal(lipgloss.Top, imgBlock, strings.Repeat(" ", gap), strings.Join(textLines, "\n"))
 	}
 
-	// narrow terminal fallback: stacked
+	// narrow terminal: stack
 	bioWidth := m.width - 4
 	if bioWidth < 30 {
 		bioWidth = 30
 	}
 	bioStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground).Width(bioWidth)
-
 	var lines []string
-	lines = append(lines, asciiBlock)
+	lines = append(lines, imgBlock)
 	lines = append(lines, "")
 	lines = append(lines, "  "+nameStyle.Render(content.MyProfile.Name))
 	lines = append(lines, "  "+roleStyle.Render(content.MyProfile.Role))

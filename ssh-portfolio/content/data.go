@@ -97,17 +97,10 @@ var Projects = []Project{
 		URL:         "",
 	},
 	{
-		Name:        "GraphSAGE-MAPPO",
-		Event:       "",
-		Description: "Multi-agent RL system on mesh networks using GraphSAGE and MAPPO. Built for research positioning at the intersection of GNNs and multi-agent systems.",
-		Tags:        []string{"PyTorch", "GNN", "MARL", "Python"},
-		URL:         "",
-	},
-	{
-		Name:        "DrugBAN Reimplementation (In Progress)",
-		Event:       "",
-		Description: "Reimplementing the Bilinear Attention Network for drug-target interaction prediction. Next project in computational drug discovery portfolio following TorsionNet.",
-		Tags:        []string{"PyTorch", "Bioinformatics", "Attention", "GNN"},
+		Name:        "SSH Terminal Portfolio",
+		Event:       "Side Project",
+		Description: "Interactive portfolio served over raw SSH — no browser, no login required. Built a Go SSH server using Wish middleware that spawns a full Bubbletea TUI per session. Features 5 navigable tabs, 3 switchable color themes, true-color portrait rendering via half-block Unicode (▄) with 24-bit ANSI, OSC 8 clickable hyperlinks, and automated CI/CD to Fly.io via GitHub Actions. Packaged as a ~7 MB Alpine Docker image. Connect: ssh -p 23234 samar-personal-portfolio.fly.dev",
+		Tags:        []string{"Go", "Wish", "Bubbletea", "Lipgloss", "Docker", "Fly.io", "SSH", "GitHub Actions", "CI/CD"},
 		URL:         "",
 	},
 }
