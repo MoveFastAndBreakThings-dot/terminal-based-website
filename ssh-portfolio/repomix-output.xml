@@ -40,6 +40,7 @@ The content is organized as follows:
 </file_summary>
 
 <directory_structure>
+.github/workflows/ci-cd.yml
 .gitignore
 apt
 content/data.go
@@ -62,15 +63,59 @@ tui/model.go
 tui/portrait.jpg
 tui/styles.go
 tui/views.go
-update
 </directory_structure>
 
 <files>
 This section contains the contents of the repository's files.
 
+<file path=".github/workflows/ci-cd.yml">
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+          cache: true
+
+      - name: Run tests
+        run: go test ./...
+
+      - name: Race detector
+        run: go test -race ./...
+
+  deploy:
+    name: Deploy to Fly.io
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+</file>
+
 <file path=".gitignore">
 .ssh/
 ssh-portfolio
+update
 </file>
 
 <file path="apt">
@@ -177,17 +222,10 @@ var Projects = []Project{
 		URL:         "",
 	},
 	{
-		Name:        "GraphSAGE-MAPPO",
-		Event:       "",
-		Description: "Multi-agent RL system on mesh networks using GraphSAGE and MAPPO. Built for research positioning at the intersection of GNNs and multi-agent systems.",
-		Tags:        []string{"PyTorch", "GNN", "MARL", "Python"},
-		URL:         "",
-	},
-	{
-		Name:        "DrugBAN Reimplementation (In Progress)",
-		Event:       "",
-		Description: "Reimplementing the Bilinear Attention Network for drug-target interaction prediction. Next project in computational drug discovery portfolio following TorsionNet.",
-		Tags:        []string{"PyTorch", "Bioinformatics", "Attention", "GNN"},
+		Name:        "SSH Terminal Portfolio",
+		Event:       "Side Project",
+		Description: "Interactive portfolio served over raw SSH — no browser, no login required. Built a Go SSH server using Wish middleware that spawns a full Bubbletea TUI per session. Features 5 navigable tabs, 3 switchable color themes, true-color portrait rendering via half-block Unicode (▄) with 24-bit ANSI, OSC 8 clickable hyperlinks, and automated CI/CD to Fly.io via GitHub Actions. Packaged as a ~7 MB Alpine Docker image. Connect: ssh -p 23234 samar-personal-portfolio.fly.dev",
+		Tags:        []string{"Go", "Wish", "Bubbletea", "Lipgloss", "Docker", "Fly.io", "SSH", "GitHub Actions", "CI/CD"},
 		URL:         "",
 	},
 }
@@ -553,7 +591,7 @@ help:
 <file path="README.md">
 <div align="center">
 
-# ssh-portfolio
+# samar-personal-portfolio
 
 **A fully interactive terminal portfolio, served over SSH.**
 Browse my work without leaving your shell.
@@ -645,6 +683,32 @@ Accept the host-key fingerprint on first connection. The key is generated once a
 | `make docker-logs` | Tail container logs |
 | `make clean` | Remove build artifacts |
 | **`make ship`** | **fmt → vet → build → test → deploy** |
+
+---
+
+## CI/CD (GitHub Actions)
+
+Every push to `main`:
+1. Runs tests + race detector
+2. If tests pass → auto-deploys to Fly.io
+
+PRs only run tests (no deploy).
+
+### One-time setup
+
+**Get Fly.io API token:**
+```bash
+fly tokens create deploy -x 999999h
+```
+Copy the output token.
+
+**Add to GitHub:**
+1. Repo → **Settings → Secrets and variables → Actions**
+2. **New repository secret**
+3. Name: `FLY_API_TOKEN`, Value: paste token
+4. Save
+
+Now every `git push` deploys automatically.
 
 ---
 
@@ -766,6 +830,9 @@ make cover
 
 ```
 ssh-portfolio/
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml    # test → deploy on push to main
 ├── main.go              # SSH server setup (wish + bubbletea middleware)
 ├── Makefile             # build / test / deploy targets
 ├── fly.toml             # Fly.io deployment config
@@ -1929,6 +1996,7 @@ package tui
 
 import (
 	"bytes"
+	"encoding/base64"
 	"fmt"
 	"image"
 	_ "image/jpeg"
@@ -1936,6 +2004,21 @@ import (
 
 	_ "embed"
 )
+
+// InlineImageRows is the terminal row height reserved for the inline portrait.
+const InlineImageRows = 22
+
+// GetInlineImage returns an iTerm2/WezTerm/Ghostty inline image escape sequence
+// for portrait.jpg. Falls back to empty string if image can't be decoded.
+func GetInlineImage() string {
+	// Verify the image is valid before sending.
+	if _, _, err := image.Decode(bytes.NewReader(portraitJPG)); err != nil {
+		return ""
+	}
+	encoded := base64.StdEncoding.EncodeToString(portraitJPG)
+	return fmt.Sprintf("\033]1337;File=inline=1;width=40;height=%d;preserveAspectRatio=1:%s\a",
+		InlineImageRows, encoded)
+}
 
 //go:embed portrait.jpg
 var portraitJPG []byte
@@ -2219,7 +2302,7 @@ type Styles struct {
 // NewStyles builds all styles from the given theme.
 func NewStyles(t Theme) Styles {
 	return Styles{
-		TabActive:   lipgloss.NewStyle().Foreground(t.Accent).Bold(true),
+		TabActive:   lipgloss.NewStyle().Background(t.Accent).Foreground(t.Background).Bold(true).Blink(true).PaddingLeft(1).PaddingRight(1),
 		TabInactive: lipgloss.NewStyle().Foreground(t.Muted),
 		Header:      lipgloss.NewStyle().Foreground(t.Dim),
 		Footer:      lipgloss.NewStyle().Foreground(t.Muted),
@@ -2262,7 +2345,7 @@ func renderHeader(m Model, s Styles) string {
 	bracketAccent := lipgloss.NewStyle().Foreground(m.theme.Accent)
 	bracketMuted := lipgloss.NewStyle().Foreground(m.theme.Muted)
 	right := bracketAccent.Render("[") +
-		bracketMuted.Render("  ssh.samar.com  ") +
+		bracketMuted.Render("   ssh -p 23234 samar-personal-portfolio.fly.dev  ") +
 		bracketAccent.Render("]")
 
 	lw := lipgloss.Width(left)
@@ -2320,14 +2403,12 @@ func renderAbout(m Model) string {
 	dimStyle := lipgloss.NewStyle().Foreground(m.theme.Dim)
 	hiStyle := lipgloss.NewStyle().Foreground(m.theme.Accent).Bold(true)
 
-	asciiBlock := GetAscii(m.theme)
-	asciiW := lipgloss.Width(asciiBlock)
+	imgBlock := GetAscii(m.theme)
+	imgW := lipgloss.Width(imgBlock)
 
 	const gap = 3
-	textW := m.width - asciiW - gap - 2
-	sideBySide := textW >= 30
-
-	if sideBySide {
+	textW := m.width - imgW - gap - 2
+	if textW >= 30 {
 		bioStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground).Width(textW)
 		var textLines []string
 		textLines = append(textLines, nameStyle.Render(content.MyProfile.Name))
@@ -2344,19 +2425,17 @@ func renderAbout(m Model) string {
 		for _, ec := range content.Extracurriculars {
 			textLines = append(textLines, dimStyle.Render("· ")+dimStyle.Render(ec))
 		}
-		textBlock := strings.Join(textLines, "\n")
-		return lipgloss.JoinHorizontal(lipgloss.Top, asciiBlock, strings.Repeat(" ", gap), textBlock)
+		return lipgloss.JoinHorizontal(lipgloss.Top, imgBlock, strings.Repeat(" ", gap), strings.Join(textLines, "\n"))
 	}
 
-	// narrow terminal fallback: stacked
+	// narrow terminal: stack
 	bioWidth := m.width - 4
 	if bioWidth < 30 {
 		bioWidth = 30
 	}
 	bioStyle := lipgloss.NewStyle().Foreground(m.theme.Foreground).Width(bioWidth)
-
 	var lines []string
-	lines = append(lines, asciiBlock)
+	lines = append(lines, imgBlock)
 	lines = append(lines, "")
 	lines = append(lines, "  "+nameStyle.Render(content.MyProfile.Name))
 	lines = append(lines, "  "+roleStyle.Render(content.MyProfile.Role))
@@ -2522,10 +2601,6 @@ func renderLinks(m Model) string {
 func osc8Link(url, displayText string) string {
 	return "\033]8;;" + url + "\033\\" + displayText + "\033]8;;\033\\"
 }
-</file>
-
-<file path="update">
-deb [trusted=yes] https://apt.fury.io/ascii-image-converter/ /
 </file>
 
 </files>

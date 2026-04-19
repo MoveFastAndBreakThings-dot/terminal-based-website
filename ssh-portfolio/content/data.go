@@ -120,7 +120,7 @@ var SkillGroups = []SkillGroup{
 	},
 	{
 		Category: "Engineering / MLOps",
-		Items:    []string{"Docker", "Git", "SSH", "Linux", "FastAPI", "REST APIs", "CI/CD", "AWS", "Supabase", "React", "GoLang"},
+		Items:    []string{"Docker", "Git", "SSH", "Linux", "FastAPI", "REST APIs", "CI/CD", "AWS", "Supabase", "React + typescript framework", "GoLang"},
 	},
 }
 
